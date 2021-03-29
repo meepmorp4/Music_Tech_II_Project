@@ -1,1 +1,1 @@
-# Music_Tech_II_project
+# Music and Technology II project - Spring 2021
