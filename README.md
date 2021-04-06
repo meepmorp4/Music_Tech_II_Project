@@ -1,2 +1,8 @@
 # Music and Technology II project (Spring 2021)
-This will be updated with actually useful things soon... maybe
+The main patch uses vanilla Pure Data with the following externals:
+
+* iemnet
+* osc
+* vstplugin~
+
+All of them can be installed via, Deken, the built-in package manager. (On the Pd menu bar, click on "Help" and then "Find externals". Make sure to include the tilde when searching for vstplugin~).
