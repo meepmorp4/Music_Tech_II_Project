@@ -1,0 +1,80 @@
+#N canvas 949 11 781 714 12;
+#X obj 14 57 osc/unpackOSC;
+#X obj 14 21 iemnet/udpreceive 6449;
+#X text 185 11 Listen for OSC message \; from the specified port.;
+#X text 119 47 Convert the mess of numbers into \; something that's
+human-readable.;
+#X obj 14 135 unpack f f f f f f f f f f f f f f f f f;
+#X obj 14 91 osc/routeOSC /playerButtons;
+#X obj 708 159 tgl 40 0 empty button_A A 17 7 0 10 -4034 -1 -1 0 1
+;
+#X obj 673 188 tgl 30 0 empty button_B B 17 7 0 10 -258113 -1 -1 0
+1;
+#X obj 754 149 tgl 30 0 empty button_X X 17 7 0 10 -228856 -1 -1 0
+1;
+#X obj 702 123 tgl 30 0 empty button_Y Y 17 7 0 10 -228856 -1 -1 0
+1;
+#X obj 726 70 tgl 30 0 empty button_Z Z 17 7 0 10 -193984 -1 -1 0 1
+;
+#X obj 460 87 tgl 30 0 empty button_L L 17 7 0 10 -191407 -1 -1 0 1
+;
+#X obj 782 86 tgl 30 0 empty button_R R 17 7 0 10 -191407 -1 -1 0 1
+;
+#X obj 541 245 tgl 25 0 empty button_D_up D_up 0 -8 0 10 -228856 -1
+-1 0 1;
+#X obj 537 301 tgl 25 0 empty button_D_down D_down 0 -8 0 10 -228856
+-1 -1 0 1;
+#X obj 502 274 tgl 25 0 empty button_D_left D_left 0 -8 0 10 -228856
+-1 -1 0 1;
+#X obj 575 274 tgl 25 0 empty button_D_right D_right 0 -8 0 10 -228856
+-1 -1 0 1;
+#X obj 458 20 vsl 50 60 1 0 0 0 empty L_shoulder L_shoulder 0 -9 0
+10 -228856 -1 -1 11800 1;
+#X obj 761 20 vsl 50 60 1 0 0 0 empty R_shoulder R_shoulder 0 -9 0
+10 -228856 -1 -1 11800 1;
+#X obj 14 159 s button_A;
+#X obj 31 182 s button_B;
+#X obj 48 205 s button_X;
+#X obj 65 228 s button_Y;
+#X obj 83 251 s button_Z;
+#X obj 100 274 s button_L;
+#X obj 117 297 s button_R;
+#X obj 135 161 s button_D_up;
+#X obj 153 184 s button_D_down;
+#X obj 169 207 s button_D_left;
+#X obj 187 231 s button_D_right;
+#X obj 222 297 s main_y;
+#X obj 204 274 s main_x;
+#X obj 239 321 s C_x;
+#X obj 256 344 s C_y;
+#X obj 273 160 s L_shoulder;
+#X obj 291 183 s R_shoulder;
+#X text 774 442 comment;
+#X obj 668 257 nbx 10 14 -1e+037 1e+037 0 0 empty C_x C_stick_x 0 -8
+0 10 -257985 -1 -1 0.5 256;
+#X obj 668 290 nbx 10 14 -1e+037 1e+037 0 0 empty C_y C_stick_y 0 -8
+0 10 -257985 -1 -1 0.5 256;
+#X obj 470 148 nbx 10 14 -1e+037 1e+037 0 0 empty main_x Main_stick_x
+0 -8 0 10 -228856 -1 -1 0.5 256;
+#X obj 470 181 nbx 10 14 -1e+037 1e+037 0 0 empty main_y Main_stick_y
+0 -8 0 10 -228856 -1 -1 0.5 256;
+#X connect 0 0 5 0;
+#X connect 1 0 0 0;
+#X connect 4 0 19 0;
+#X connect 4 1 20 0;
+#X connect 4 2 21 0;
+#X connect 4 3 22 0;
+#X connect 4 4 23 0;
+#X connect 4 5 24 0;
+#X connect 4 6 25 0;
+#X connect 4 7 26 0;
+#X connect 4 8 27 0;
+#X connect 4 9 28 0;
+#X connect 4 10 29 0;
+#X connect 4 11 31 0;
+#X connect 4 12 30 0;
+#X connect 4 13 32 0;
+#X connect 4 14 33 0;
+#X connect 4 15 34 0;
+#X connect 4 16 35 0;
+#X connect 5 0 4 0;
