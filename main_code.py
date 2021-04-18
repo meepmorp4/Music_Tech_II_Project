@@ -107,6 +107,8 @@ while True:
         #####################################        
         get_gamestate(playerState, playerPort)
         get_gamestate(enemyState, enemyPort)
+        get_inputs(playerInput, playerPort)
+        get_inputs(enemyInput, enemyPort)
 
         client.send( OSCMessage(playerAdd, playerState))
         client.send( OSCMessage(enemyAdd, enemyState))
