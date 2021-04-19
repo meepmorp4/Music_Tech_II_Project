@@ -1,12 +1,16 @@
 # Music and Technology II project (Spring 2021)
-## Python stuff
+## Summary
+Sonifying and spatializing Melee
+
+## Necessary Python packages and Pure Data externals
+### Python
 The Python code imports the following APIs:
 * melee   (GitHub: https://github.com/altf4/libmelee/)
 * pyOSC3  (GitHub: https://github.com/Qirky/pyOSC3/)
 
 Both can be installed using pip.
 
-## Pure Data stuff
+### Pure Data
 The main patch uses vanilla Pure Data with the following externals:
 
 * iemnet
