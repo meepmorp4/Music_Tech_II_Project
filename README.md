@@ -16,4 +16,4 @@ The main patch uses vanilla Pure Data with the following externals:
 * osc
 * vstplugin~
 
-These can be installed via, Deken, the built-in package manager. (On the Pd menu bar, click on "Help" and then "Find externals". Make sure to include the tilde when searching for vstplugin~.)
+These can be installed through Deken, the built-in package manager. (On the Pd menu bar, click on "Help" and then "Find externals". Make sure to include the tilde when searching for vstplugin~.)
