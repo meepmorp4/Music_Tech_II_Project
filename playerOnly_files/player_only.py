@@ -32,21 +32,20 @@ playerInputAdd = "/playerInput"     # for actual inputs
 enemyInputAdd = "/enemyInput"       # for actual inputs
 
 # Character gamestate info ordered as:
-# x, y, on_ground, off_stage, on_platform
+# x, y, on_ground, max_jumps, jumps_left, on_platform
 playerState = [0, 0, 0, 0, 0]
 enemyState = [0, 0, 0, 0, 0]
 # Get gamestate 
 def get_gamestate(states_list, port):
-    states_list[0] = int(gamestate.player[port].x)
-    states_list[1] = int(gamestate.player[port].y)
-    states_list[2] = int(gamestate.player[port].on_ground) # boolean
-    states_list[3] = int(gamestate.player[port].off_stage) # boolean
-    # I'm defining "on_platform" as having a Y position > 1 
-    #  while still being considered "on_ground".
-    if (states_list[1] > 1 and states_list[2] == 1): 
-        states_list[4] = 1
-    else:
-        states_list[4] = 0
+    states_list[0] = int(gamestate.player[port].x)  # x position
+    states_list[1] = int(gamestate.player[port].y)  # y position
+    states_list[2] = int(gamestate.player[port].on_ground)  # on ground or not
+    states_list[3] = int(gamestate.player[port].jumps_left) # maximum jumps
+    # states_list[5] = int(gamestate.player[port].max_jumps)  # remaining jumps
+        # ^current code is incorrect; need to pull from framedata 
+    # if character is on a platform (1 if yes, 0 if not)
+    # states_list[6] = int(states_list[1] > 1 and states_list[2] == 1)
+
     # (int(gamestate.player[2].percent))
     # (int(gamestate.player[2].stock))
 
@@ -83,7 +82,7 @@ plat_left = [-57.6+(width/2), 27.2]
 plat_top = [0, 54.4]
 plat_right = [20+(width/2), 27.2]
 
-def ledge_check (input_list, state_list, port):
+def plat_check (input_list, state_list, port):
     if (input_list[8]):     # if D-pad down is pressed
         if (state_list[0] < 0): # character is on left side of stage
             ordered = [plat_left[0], plat_left[1],
@@ -95,6 +94,7 @@ def ledge_check (input_list, state_list, port):
                         plat_left[0], plat_left[1]]
         client.send( OSCMessage("/platforms", ordered) )
         # print(ordered)
+
 
 # Port assignment
 playerPort = 2
@@ -134,7 +134,7 @@ while True:
         client.send( OSCMessage(playerAdd, playerState))
         client.send( OSCMessage(playerInputAdd, playerInput))
 
-        ledge_check(playerInput, playerState, playerPort)          
+        plat_check(playerInput, playerState, playerPort)
 
     # If we're not in a match (e.g. menu, score screen)
     else:
@@ -148,5 +148,3 @@ while True:
             costume=1,      # The bot's color palette.
             autostart=False,# Whether player must press start to begin match.
             swag=False) # Whether bot annoys you while you choose your character.
-
-
