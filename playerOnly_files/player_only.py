@@ -32,22 +32,40 @@ playerInputAdd = "/playerInput"     # for actual inputs
 enemyInputAdd = "/enemyInput"       # for actual inputs
 
 # Character gamestate info ordered as:
-# x, y, on_ground, max_jumps, jumps_left, on_platform
-playerState = [0, 0, 0, 0, 0]
-enemyState = [0, 0, 0, 0, 0]
+# x, y, percent, shield_strength, stock, 
+# facing, action, action_frame, invulnerable, invulnerability_left
+# hitlag_left, hitstun_frames_left, jumps_left, on_ground, on_platform
+# speed_air_x_self, speed_x_ground_self, speed_y_self, speed_x_attack, speed_y_attack
+playerState = [ 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0]
+
 # Get gamestate 
 def get_gamestate(states_list, port):
-    states_list[0] = int(gamestate.player[port].x)  # x position
-    states_list[1] = int(gamestate.player[port].y)  # y position
-    states_list[2] = int(gamestate.player[port].on_ground)  # on ground or not
-    states_list[3] = int(gamestate.player[port].jumps_left) # maximum jumps
-    # states_list[5] = int(gamestate.player[port].max_jumps)  # remaining jumps
-        # ^current code is incorrect; need to pull from framedata 
-    # if character is on a platform (1 if yes, 0 if not)
-    # states_list[6] = int(states_list[1] > 1 and states_list[2] == 1)
+    states_list[0] = int(gamestate.player[port].x)  # position_x
+    states_list[1] = int(gamestate.player[port].y)  # position_y
+    states_list[2] = int(gamestate.player[port].percent)  # percent
+    states_list[3] = int(gamestate.player[port].shield_strength)  # shield_strength
+    states_list[4] = int(gamestate.player[port].stock)  # stock
+    
+    states_list[5] = int(gamestate.player[port].facing)  # facing (bool; L=False, R=True)
+    #states_list[6] = gamestate.player[port].action  # action (enum.Action)
+    states_list[7] = int(gamestate.player[port].action_frame)  # action_frame
+    states_list[8] = int(gamestate.player[port].invulnerable)  # invulnerable (bool)
+    states_list[9] = int(gamestate.player[port].invulnerability_left)  # invulnerability_left
+    
+    #states_list[10] = int(gamestate.player[port].hitlag_left)  # hitlag_left (bool)
+    states_list[11] = int(gamestate.player[port].hitstun_frames_left)  # hitstun_frames_left
+    states_list[12] = int(gamestate.player[port].jumps_left)  # jumps_left
+    states_list[13] = int(gamestate.player[port].on_ground)  # on_ground (bool)
+    states_list[14] = int(states_list[1] > 1 and states_list[2] == 1)  # on_platform (bool)
 
-    # (int(gamestate.player[2].percent))
-    # (int(gamestate.player[2].stock))
+    states_list[15] = gamestate.player[port].speed_air_x_self  # speed_air_x_self
+    states_list[16] = gamestate.player[port].speed_ground_x_self  # speed_ground_x_self
+    states_list[17] = gamestate.player[port].speed_y_self  # speed_y_self
+    states_list[18] = gamestate.player[port].speed_x_attack  # speed_x_attack
+    states_list[19] = gamestate.player[port].speed_y_attack # speed_y_attack
 
 # Button inputs ordered as:
 # A, B, X, Y, Z, L, R, D_UP, D_DOWN, D_LEFT, D_RIGHT, (11 booleans)
@@ -73,6 +91,7 @@ def get_inputs(input_list, port):
     input_list[15] = (gamestate.player[port].controller_state.l_shoulder) # l shoulder bumper (0 to 1)
     input_list[16] = (gamestate.player[port].controller_state.r_shoulder) # r shoulder bumper (0 to 1)
 
+# THESE ONLY APPLY TO BATTLEFIELD
 # Stage ledge positions [X,Y]
 ledge_left = [-68.4, 0]
 ledge_right = [68.4, 0]
